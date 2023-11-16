@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+
+
 export const Project = function ({project, onProjectClick, handleDeleteClick}) {
 
     const convertToTitleCase = function (str) {
