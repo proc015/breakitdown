@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { API_KEY } from './hide/api-key'; 
+import { API_KEY } from '../hide/api-key'; 
 import OpenAI from 'openai'
 
 
