@@ -1,11 +1,18 @@
-import API_KEY from '../secrets/apikey.js';
+import { Request } from 'express';
+import { API_KEY } from './hide/api-key'; 
 import OpenAI from 'openai'
 
 
 // Fetches data from OpenAI API
 // parameter: Object {project: "Clean my room", description: "My room is a mess"}
 // returns: Array [{project: "Gather cleaning supplies"}, ...] OR null if error in API request
-async function getDataFromOpenAI (request) {
+
+interface DataRequest {
+    project: string; 
+    description: string; 
+}
+
+async function getDataFromOpenAI (request: DataRequest) {
     console.log(request)
         const response = await requestDataFromOpenAI(request.project, request.description);
         if (!response) return null;
@@ -18,7 +25,7 @@ async function getDataFromOpenAI (request) {
 };
 
 // requests data from OpenAI API
-async function requestDataFromOpenAI (name, description=null) {
+async function requestDataFromOpenAI (name:string, description: string | null) {
     const openai = new OpenAI({
         apiKey: API_KEY,
     });
@@ -44,7 +51,7 @@ async function requestDataFromOpenAI (name, description=null) {
 };
 
 // cleans and formats response
-function formatResponse (response) {
+function formatResponse (response:string) {
     // console.log('dirty: ', response)
     const cleanedUpList = response.split('\n').map((str) => str.replaceAll(/^([\d\p{P}\p{Z}]+)/gu, '').trim()).filter((str) => str != '\n' && str != '')
     // console.log('clean: ', cleanedUpList)

@@ -1,7 +1,8 @@
+import { Request, Response } from 'express';
 import getDataFromOpenAI from '../api.js'
 import {db} from '../models/index.js'
 
-export async function getDataFromAPI (req, res) {
+export async function getDataFromAPI (req: Request, res: Response) {
     // TODO check if req.body has correct format
   try {
     const data = await getDataFromOpenAI(req.body);
@@ -13,7 +14,7 @@ export async function getDataFromAPI (req, res) {
 }
 }
 
-export async function postProject (req, res) {
+export async function postProject (req: Request, res: Response) {
   try {
     const newProject = req.body;
     console.log(newProject)
@@ -27,7 +28,7 @@ export async function postProject (req, res) {
 }
 }
 
-export async function getProjects (req, res) {
+export async function getProjects (req: Request, res: Response) {
     try {
         const response = await db.find({});
         res.status(201);
@@ -38,7 +39,7 @@ export async function getProjects (req, res) {
     }
 }
 
-export async function deleteProject (req, res) {
+export async function deleteProject (req: Request, res: Response) {
     console.log(req.body)
     try {
         const response = await db.deleteOne({id: req.body.id})
