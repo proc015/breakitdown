@@ -2,13 +2,19 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './styles.css'
-import getBreakdown, { sendToServer } from '../../api-service.js'
+// @ts-ignore
+import getBreakdown, { sendToServer } from '../../api-service'
 import {v4 as uuidv4} from 'uuid'
-import moment from 'moment'
+// import moment from 'moment'
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 
+interface CreateProjectProps {
+    toggleCreateModal: Function,
+    projects: [],
+    setProjects: []
+}
 
-export const CreateProject = function ({toggleCreateModal, projects, setProjects}) {
+export const CreateProject = function ({toggleCreateModal, projects, setProjects}: CreateProjectProps) {
     const [projectData, setprojectData] = useState({
         project: "",
         date: new Date(),
@@ -16,7 +22,13 @@ export const CreateProject = function ({toggleCreateModal, projects, setProjects
         id: uuidv4(),
         tasks: []
     });
-    const [steps, setSteps] = useState([])
+    const [steps, setSteps] = useState([{
+        project: '',
+        id: '',
+        date: new Date(),
+        parent: '',
+        completed: false
+    }])
 
     // Creating a step
     // if the project is provided (from api), add it to project prop, otherwise initialise as empty
@@ -26,8 +38,8 @@ export const CreateProject = function ({toggleCreateModal, projects, setProjects
         }
 
 
-    const deleteStep = function (id) {
-        setSteps(steps.filter((step) => step.id != id))
+    const deleteStep = function (id: string) {
+        setSteps(steps.filter((step) => step.id !== id))
     }
 
     // Breaking the project down
@@ -59,18 +71,18 @@ export const CreateProject = function ({toggleCreateModal, projects, setProjects
         const name = event.target.name;
         const value = event.target.value;
 
-        if (name == 'project-name') {
+        if (name === 'project-name') {
             setprojectData((prev) => ({...prev, project: value}));
         } 
         
-        else if (name == 'project-description') {
+        else if (name === 'project-description') {
             setprojectData((prev) => ({...prev, description: value}));
 
         } 
         
         else {
             setSteps(
-                steps.map((step) => name == step.id ? {...step, project: value} : step)
+                steps.map((step) => name === step.id ? {...step, project: value} : step)
             )
         }    
     }
@@ -78,7 +90,7 @@ export const CreateProject = function ({toggleCreateModal, projects, setProjects
 
     // Handling change in step date fields 
     const handleDateChange = function (date, id) {
-        setSteps(steps.map((step) => step.id == id ? {...step, date: new Date(date)} : step));
+        setSteps(steps.map((step) => step.id === id ? {...step, date: new Date(date)} : step));
     }
 
 
