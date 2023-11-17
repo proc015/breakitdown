@@ -1,4 +1,4 @@
-export const Navigation = function ({handleNavbarClick, toggleCreateModal}) {
+export const Navigation = function ({handleNavbarClick, toggleCreateModal}: {handleNavbarClick: () => void, toggleCreateModal: () => void}) {
 
 
     return (
