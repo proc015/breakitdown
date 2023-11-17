@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChangeEvent, FormEvent, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,10 +8,11 @@ import getBreakdown, { sendToServer } from '../../api-service'
 import {v4 as uuidv4} from 'uuid'
 // import moment from 'moment'
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
+import { ProjectProp, TaskProp } from "../project&task/project-info";
 
 interface CreateProjectProps {
     toggleCreateModal: Function,
-    projects: [],
+    projects: ProjectProp[],
     setProjects: Function
 }
 
@@ -22,8 +24,16 @@ interface Steps {
     completed: boolean
 }
 
+export interface ProjectData {
+    project: string,
+    date: Date,
+    description: string,
+    id: string,
+    tasks: TaskProp[]
+}
+
 export const CreateProject = function ({toggleCreateModal, projects, setProjects}: CreateProjectProps) {
-    const [projectData, setprojectData] = useState({
+    const [projectData, setprojectData] = useState<ProjectData>({
         project: "",
         date: new Date(),
         description: "",
@@ -70,7 +80,7 @@ export const CreateProject = function ({toggleCreateModal, projects, setProjects
         event.preventDefault()
         setProjects([...projects, {project: projectData.project, date: projectData.date, id: projectData.id, tasks: [...steps]}])
         // TO DO: check if this result var does anything. For now this is being ignored
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // @ts-ignore - tasks type is weird
         const result = await sendToServer({...projectData, tasks: [...steps]})
         toggleCreateModal()
     }

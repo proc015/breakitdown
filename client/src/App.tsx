@@ -4,12 +4,16 @@ import {ProjectDashboard} from './components/dashboard/project-dashboard.js'
 import { useState } from 'react';
 import {Navigation} from './components/navigation/navigation.js'
 import { Navbar } from './components/navigation/navbar.js';
+// TO DO:
+// @ts-ignore
 import { getProjectsFromServer } from './api-service.js';
-import {v4 as uuidv4} from 'uuid'
+// import {v4 as uuidv4} from 'uuid'
 import { useEffect } from 'react';
 import { TaskDashboard } from './components/dashboard/task-dashboard.js';
+import { ProjectProp } from './components/project&task/project-info';
 
-
+// TO DO:
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mockObj = [
   {
     "project": "Clean My House",
@@ -64,7 +68,7 @@ const mockObj = [
   }
 ]
 function App() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<ProjectProp[]>([]);
   const [openCreateModal, setOpenCreateModal] = useState(true)
   const [openNavbar, setOpenNavbar] = useState(false)
   const [openProjectDashboard, setOpenProjectDashboard] = useState(true)
@@ -97,20 +101,17 @@ function App() {
 
   return (
     <div className="App p-0 m-0 min-h-[100vh] ">
-        <Navigation className="h-100"
+        {/* TO DO: className='h-100' not a valid tailwind class and also cannot apply className to component directly */}
+        <Navigation
         handleNavbarClick={handleNavbarClick} 
         toggleCreateModal={toggleCreateModal}
-        >
-        </Navigation>
+        />
       {openNavbar ?
         <Navbar 
         setOpenNavbar={setOpenNavbar}
-        openProjectDashboard={openProjectDashboard} 
         setOpenProjectDashboard={setOpenProjectDashboard}
-        openTaskDashboard={openTaskDashboard} 
         setOpenTaskDashboard={setOpenTaskDashboard}
-        >
-        </Navbar>
+        />
         :
         <div></div>
       }
@@ -128,7 +129,8 @@ function App() {
       }
       {
         openCreateModal ? 
-          <CreateProject projects={projects} setProjects={setProjects} toggleCreateModal={toggleCreateModal} className="CreateProject"></CreateProject>
+          // TO DO: check if deleting className='CreateProject' from this component did anything
+          <CreateProject projects={projects} setProjects={setProjects} toggleCreateModal={toggleCreateModal}></CreateProject>
           :
           null
       } 

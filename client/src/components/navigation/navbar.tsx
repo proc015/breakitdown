@@ -1,5 +1,5 @@
-export const Navbar = function ({setOpenNavbar, openProjectDashboard, setOpenProjectDashboard, openTaskDashboard, setOpenTaskDashboard}: 
-    {setOpenNavbar: (input:boolean) => void, openProjectDashboard:(input:boolean) => void, setOpenProjectDashboard:(input:boolean) => void, openTaskDashboard:boolean, setOpenTaskDashboard: (input:boolean) => void}) {
+export const Navbar = function ({setOpenNavbar, setOpenProjectDashboard, setOpenTaskDashboard}: 
+    {setOpenNavbar: Function, setOpenProjectDashboard: Function, setOpenTaskDashboard: Function}) {
 
     const goToTaskDashboard = function () {
         setOpenProjectDashboard(false)

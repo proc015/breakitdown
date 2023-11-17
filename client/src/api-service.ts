@@ -1,10 +1,11 @@
+import { ProjectData } from "./components/create-project/create-project"
+import { ProjectProp } from "./components/project&task/project-info"
+
 const BASE_URL = 'http://localhost:3000'
-
-
 // gets subprojects of provided project from server side API
 // parameter: Object {project: "Wash my dogs", description: "Lulu needs a bath"}
 // returns: Array [{project: "Get Lulu from doggy daycare"}, ...]
-export const getBreakdown = async function (project) {
+export const getBreakdown = async function (project: ProjectData) {
     // TODO check to see that project has correct format
     try {
         const response = await fetch(BASE_URL + '/breakdown', {
@@ -21,7 +22,7 @@ export const getBreakdown = async function (project) {
     }
 }
 
-export const sendToServer = async function (project) {
+export const sendToServer = async function (project: ProjectData) {
     try {
         const response = await fetch(BASE_URL + '/projects', {
             method: 'POST',
@@ -49,7 +50,7 @@ export const getProjectsFromServer = async function () {
     }
 }
 
-export const deleteProject = async function (project) {
+export const deleteProject = async function (project: ProjectProp) {
     try {
         const response = await fetch(BASE_URL + '/projects', {
             method: 'DELETE',
@@ -58,14 +59,14 @@ export const deleteProject = async function (project) {
             },
             body: JSON.stringify(project)
         });
-        const result = await response.JSON()
+        const result = await response.json()
         return result;
     } catch (error) {
         console.log('Error in apiservice when deleting project: ', error)
     }
 }
 
-export const toggleCompleted = async function (project) {
+export const toggleCompleted = async function (project: ProjectData) {
     try {
         const response = await fetch(BASE_URL + '/projects', {
             method: 'PUT',

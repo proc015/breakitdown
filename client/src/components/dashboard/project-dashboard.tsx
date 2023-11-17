@@ -31,7 +31,7 @@ export const ProjectDashboard = function ({projects, setProjects}: ProjectDashbo
   }
 
   const handleDeleteClick = function (id: string) {
-    const deleteThis = projects.find((project) => project.id === id)
+    const deleteThis = projects.find((project) => project.id === id)!
     setProjects(projects.filter((project) => project.id !== id))
     deleteProject(deleteThis)
 

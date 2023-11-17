@@ -5,6 +5,8 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
+// TO DO
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import moment, { Moment } from 'moment';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -33,6 +35,8 @@ export const TimelineBox = function (props: TimelineBoxProps) {
 
     useEffect(() => {
         setSortedList(sortByDate())
+        // TO DO:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.projects])
 
     const sortByDate = function () {
