@@ -1,5 +1,5 @@
 import { ProjectData } from "./components/create-project/create-project"
-import { ProjectProp } from "./components/project&task/project-info"
+import { ProjectProp, TaskProp } from "./components/project&task/project-info"
 
 const BASE_URL = 'http://localhost:3000'
 // gets subprojects of provided project from server side API
@@ -66,7 +66,7 @@ export const deleteProject = async function (project: ProjectProp) {
     }
 }
 
-export const toggleCompleted = async function (project: ProjectData) {
+export const toggleCompleted = async function (project: TaskProp) {
     try {
         const response = await fetch(BASE_URL + '/projects', {
             method: 'PUT',
