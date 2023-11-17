@@ -1,18 +1,26 @@
 
-interface ProjectInfoProps {
+export interface ProjectProp {
     project: string, 
+    date: string, 
     description: string,
-    tasks: Task[]  
+    id: string, 
+    tasks: TaskProp[]  
 }
 
-interface Task {
+export interface TaskProp {
     task: string, 
     date: string, 
+    id: string, 
+    parent: string, 
+    completed?: boolean,
+    project?:string
 }
 
-export const ProjectInfo = function ({project}: {project:ProjectInfoProps}) {
+export const ProjectInfo = function ({project}: {project:ProjectProp}) {
     console.log("projetModal")
     console.log(project)
+    
+    
     return (
         <div className="ProjectInfo">
             <h1>{project.project} </h1>
@@ -25,9 +33,11 @@ export const ProjectInfo = function ({project}: {project:ProjectInfoProps}) {
                 :
                 <div></div>
             }
-            {
-                project.tasks.map<Task[]>((task:Task) => {
-                    <div className="project-info-task"></div>
+            //@ts-ignore 
+            // need to fix map with any below
+            {  
+             project.tasks.map<any>((task) => {
+            <div className="project-info-task"></div>
                 })
             }
         </div>

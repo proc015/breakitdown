@@ -1,10 +1,14 @@
 import { useEffect } from "react";
+import { ProjectProp } from "./project-info";
+import { TaskProp } from "./project-info";
 
+// TO DO: onProjectClick and handleDeleteClick don't seem to be used 
 
+// TO DO: Review line 50 with the ?.project syntax
 
-export const Project = function ({project, onProjectClick, handleDeleteClick}) {
+export const Project = function ({project, onProjectClick, handleDeleteClick}:{project:ProjectProp, onProjectClick: void, handleDeleteClick: void}, ) {
 
-    const convertToTitleCase = function (str) {
+    const convertToTitleCase = function (str: string) {
         if (!str) {
             return ""
         }
