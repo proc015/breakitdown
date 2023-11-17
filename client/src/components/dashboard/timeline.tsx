@@ -25,7 +25,7 @@ export const TimelineBox = function (props) {
     }, [props.projects])
 
     const sortByDate = function () {
-        return [...props.projects.sort((a,b) => new Date(a.date) - new Date(b.date))]
+        return [...props.projects.sort((a, b) => new Date(a.date) - new Date(b.date))]
     }
 
   return (

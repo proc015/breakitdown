@@ -1,6 +1,13 @@
-export const FilterByDate = function ({setShowingProjects, projects}) {
+import { ChangeEvent } from "react";
 
-    const filterProjects = function (e) {
+interface FilterByDateProps {
+  setShowingProjects: any,
+  projects: [{}]
+}
+
+export const FilterByDate = function ({setShowingProjects, projects}: FilterByDateProps) {
+
+    const filterProjects = function (e: ChangeEvent<HTMLSelectElement>) {
         let today = new Date();
     
         switch (e.target.value) {
@@ -11,9 +18,9 @@ export const FilterByDate = function ({setShowingProjects, projects}) {
     
           case "today":
             const todaysProjects = projects.filter((project) => {
-              return new Date(project.date).getDate() == today.getDate() &&
-              new Date(project.date).getMonth() == today.getMonth() &&
-              new Date(project.date).getYear() == today.getYear()
+              return new Date(project.date).getDate() === today.getDate() &&
+              new Date(project.date).getMonth() === today.getMonth() &&
+              new Date(project.date).getFullYear() === today.getFullYear()
             })
     
             setShowingProjects([...todaysProjects])
@@ -38,7 +45,7 @@ export const FilterByDate = function ({setShowingProjects, projects}) {
     
               return week.some((date) => {
                 return (
-                  projectDate.getYear() === date.getYear() &&
+                  projectDate.getFullYear() === date.getFullYear() &&
                   projectDate.getMonth() === date.getMonth() &&
                   projectDate.getDate() === date.getDate()
                 );
@@ -51,8 +58,8 @@ export const FilterByDate = function ({setShowingProjects, projects}) {
     
           case "this-month":
             const thisMonthsProjects = projects.filter((project) => {
-              return new Date(project.date).getMonth() == today.getMonth() &&
-              new Date(project.date).getYear() == today.getYear()
+              return new Date(project.date).getMonth() === today.getMonth() &&
+              new Date(project.date).getFullYear() === today.getFullYear()
             })
     
             setShowingProjects([...thisMonthsProjects]);
