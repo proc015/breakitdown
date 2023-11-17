@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, ChangeEvent } from "react"
 import {Task} from '../project&task/task'
+import { ProjectProp, TaskProp } from "../project&task/project-info"
 
-export const TaskDashboard = function ({setProjects, projects}) {
-    const [tasks, setTasks] = useState([])
-    const [Tasks, setShowingTasks] = useState([])
+interface TaskDashboardProps {
+    setProjects: Function,
+    projects: ProjectProp[]
+}
+
+export const TaskDashboard = function ({setProjects, projects}: TaskDashboardProps) {
+    const [tasks, setTasks] = useState<TaskProp[]>([])
+    // const [Tasks, setShowingTasks] = useState([])
     
     useEffect(() => {
         const taskList = projects.filter((project) => project.tasks?.length).map((project) => project.tasks).flat()
@@ -12,7 +18,7 @@ export const TaskDashboard = function ({setProjects, projects}) {
 
 
 
-    const filterByProject = function (e) {
+    const filterByProject = function (e: ChangeEvent<HTMLSelectElement>) {
         const selectedOption = e.target.value;
         const taskList = projects.filter((project) => project.tasks?.length).map((project) => project.tasks).flat() // FIXME: make DRY
         
@@ -46,7 +52,7 @@ export const TaskDashboard = function ({setProjects, projects}) {
             { tasks.length ? 
                 tasks.map((task, index) =>{
                     return (
-                        <Task key={index} projects={projects} task={task} setTasks={setTasks} tasks={tasks} setProjects={setProjects}></Task>
+                        <Task key={index} projects={projects} task={task} setTasks={setTasks} setProjects={setProjects}></Task>
                     )
                 })
                 :

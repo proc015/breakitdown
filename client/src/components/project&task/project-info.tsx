@@ -33,11 +33,11 @@ export const ProjectInfo = function ({project}: {project:ProjectProp}) {
                 :
                 <div></div>
             }
-            //@ts-ignore 
-            // need to fix map with any below
+            {/* //@ts-ignore 
+            // need to fix map with any below */}
             {  
              project.tasks.map<any>((task) => {
-            <div className="project-info-task"></div>
+                return <div className="project-info-task"></div>
                 })
             }
         </div>

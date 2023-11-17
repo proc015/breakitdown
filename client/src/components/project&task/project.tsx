@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { ProjectProp } from "./project-info";
+// TO DO:
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { TaskProp } from "./project-info";
 
 // TO DO: onProjectClick and handleDeleteClick don't seem to be used 
 
 // TO DO: Review line 50 with the ?.project syntax
 
-export const Project = function ({project, onProjectClick, handleDeleteClick}:{project:ProjectProp, onProjectClick: void, handleDeleteClick: void}, ) {
+export const Project = function ({project, onProjectClick, handleDeleteClick}:{project:ProjectProp, onProjectClick: Function, handleDeleteClick: Function}, ) {
 
     const convertToTitleCase = function (str: string) {
         if (!str) {
@@ -18,6 +20,7 @@ export const Project = function ({project, onProjectClick, handleDeleteClick}:{p
       useEffect(() => {
         calculateProgress()
         console.log('progress, ', calculateProgress())
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [project])
 
 

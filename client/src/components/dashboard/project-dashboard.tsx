@@ -2,14 +2,20 @@ import { useState } from 'react'
 import {Project} from '../project&task/project'
 import { useEffect } from 'react'
 import { ProjectInfo } from '../project&task/project-info'
+// @ts-ignore
 import { deleteProject } from '../../api-service'
 import { TimelineBox } from './timeline'
 import { FilterByDate } from './filter-by-date'
+import { ProjectProp } from '../project&task/project-info'
 
+interface ProjectDashboardProps {
+  projects: ProjectProp[],
+  setProjects: Function
+}
 
-export const ProjectDashboard = function ({projects, setProjects}) {
+export const ProjectDashboard = function ({projects, setProjects}: ProjectDashboardProps) {
   const [projectModal, toggleProjectModal] = useState(false)
-  const [clickedProject, setClickedProject] = useState({})
+  const [clickedProject, setClickedProject] = useState<ProjectProp>()
   const [showingProjects, setShowingProjects] = useState(projects)
   const [showOption, setShowOption] = useState(false)
   
@@ -18,15 +24,15 @@ export const ProjectDashboard = function ({projects, setProjects}) {
   }, [projects])
 
 
-  const handleProjectClick = function (project) {
+  const handleProjectClick = function (project: ProjectProp) {
     toggleProjectModal(!projectModal)
     setClickedProject(project)
 
   }
 
-  const handleDeleteClick = function (id) {
+  const handleDeleteClick = function (id: string) {
     const deleteThis = projects.find((project) => project.id === id)
-    setProjects(projects.filter((project) => project.id != id))
+    setProjects(projects.filter((project) => project.id !== id))
     deleteProject(deleteThis)
 
   }
@@ -51,13 +57,14 @@ export const ProjectDashboard = function ({projects, setProjects}) {
       </button>
         {
           projectModal ?
-          <ProjectInfo project={clickedProject} toggleProjectModal={toggleProjectModal}></ProjectInfo>
+          <ProjectInfo project={clickedProject!}></ProjectInfo>
           :
           null
 // ${showOption ? 'h-fit' : 'h-28'} `}
         } 
         </div>
-        <div className={`main-dashboard grid xl:grid-cols-4 overflow-hidden lg:grid-cols-3 md:grid-cols-2 sm-grid-cols-1 gap-5	`} style={{ height: 'fit-content', height: `${showOption ? '300px' : '230px'}`, transition: 'height 0.5s ease-out'}} >
+                                                                                                                          
+        <div className={`main-dashboard grid xl:grid-cols-4 overflow-hidden lg:grid-cols-3 md:grid-cols-2 sm-grid-cols-1 gap-5	`} style={{height: `${showOption ? '300px' : '230px'}`, transition: 'height 0.5s ease-out'}} >
             { showingProjects && showingProjects.length ? 
               showingProjects.map((project, index) => {
                 return (

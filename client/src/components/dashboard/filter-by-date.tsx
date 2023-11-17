@@ -1,8 +1,9 @@
 import { ChangeEvent } from "react";
+import { ProjectProp } from "../project&task/project-info";
 
 interface FilterByDateProps {
   setShowingProjects: any,
-  projects: [{}]
+  projects: ProjectProp[]
 }
 
 export const FilterByDate = function ({setShowingProjects, projects}: FilterByDateProps) {

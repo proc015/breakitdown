@@ -1,4 +1,5 @@
 import Checkbox from '@mui/material/Checkbox';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineSharp';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
@@ -8,7 +9,7 @@ import {toggleCompleted} from '../../api-service'
 import { ProjectProp } from './project-info';
 import { TaskProp } from './project-info';
 
-export const Task = function ({projects, task, setTasks, tasks, setProjects}: {projects: ProjectProp[], task:TaskProp, setTasks:void, tasks: TaskProp, setProjects: (projects:ProjectProp[]) => void }) {
+export const Task = function ({projects, task, setTasks, setProjects}: {projects: ProjectProp[], task:TaskProp, setTasks: Function, setProjects: Function }) {
 
     const parseTime = function (task?:TaskProp) {
         const date = new Date(task!.date)
@@ -52,6 +53,7 @@ export const Task = function ({projects, task, setTasks, tasks, setProjects}: {p
     const saveCompletedStatus = async function () {
         try {
             console.log(task.id)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const result = await toggleCompleted(task);
         } catch (error) {
             console.log(error)
