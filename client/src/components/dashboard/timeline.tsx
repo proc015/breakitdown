@@ -5,19 +5,30 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
+import { ProjectProp } from '../project&task/project-info';
 
 
+interface TimelineBoxProps {
+    projects: ProjectProp[],
+}
 
-export const TimelineBox = function (props) {
-    const [sortedList, setSortedList] = useState([])
+interface ProjectDate {
+    date: string; 
+    project: string; 
+}
 
-    const formatDate = function (date) {
+
+export const TimelineBox = function (props: TimelineBoxProps) {
+    const [sortedList, setSortedList] = useState<ProjectDate[]>([])
+
+    
+    const formatDate = function (date:ProjectDate) {
         console.log(date)
-        return moment(new Date(date.date)).format("DD MMM")
+        return moment(new Date(date.date).valueOf()).format("DD MMM")
     }
 
     useEffect(() => {
@@ -25,7 +36,7 @@ export const TimelineBox = function (props) {
     }, [props.projects])
 
     const sortByDate = function () {
-        return [...props.projects.sort((a, b) => new Date(a.date) - new Date(b.date))]
+        return [...props.projects.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())]
     }
 
   return (
