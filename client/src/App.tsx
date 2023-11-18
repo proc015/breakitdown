@@ -1,15 +1,15 @@
 import './App.css';
-import {CreateProject} from './components/create-project/create-project.js';
-import {ProjectDashboard} from './components/dashboard/project-dashboard.js'
+import {CreateProject} from './components/create-project/create-project';
+import {ProjectDashboard} from './components/dashboard/project-dashboard'
 import { useState } from 'react';
-import {Navigation} from './components/navigation/navigation.js'
-import { Navbar } from './components/navigation/navbar.js';
+import {Navigation} from './components/navigation/navigation'
+import { Navbar } from './components/navigation/navbar';
 // TO DO:
 // @ts-ignore
-import { getProjectsFromServer } from './api-service.js';
+import { getProjectsFromServer } from './api-service';
 // import {v4 as uuidv4} from 'uuid'
 import { useEffect } from 'react';
-import { TaskDashboard } from './components/dashboard/task-dashboard.js';
+import { TaskDashboard } from './components/dashboard/task-dashboard';
 import { ProjectProp } from './components/project&task/project-info';
 
 // TO DO:
