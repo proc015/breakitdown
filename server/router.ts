@@ -1,5 +1,5 @@
 import express from 'express';
-import {getDataFromAPI, postProject, getProjects, deleteProject} from './controllers/controller.js'
+import {getDataFromAPI, postProject, getProjects, deleteProject} from './controllers/controller'
 
 const router = express.Router()
 

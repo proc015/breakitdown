@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {projectSchema} from "./schemas.js";
+import {projectSchema} from "./schemas";
 
 main().catch((err) => console.log(err));
 

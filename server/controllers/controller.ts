@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import getDataFromOpenAI from '../api.js'
-import {db} from '../models/index.js'
+import getDataFromOpenAI from '../api'
+import {db} from '../models/index'
 
 export async function getDataFromAPI (req: Request, res: Response) {
     // TODO check if req.body has correct format
