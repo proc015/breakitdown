@@ -7,6 +7,8 @@ import {v4 as uuidv4} from 'uuid'
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import CloseIcon from '@mui/icons-material/Close';
 import { FidgetSpinner } from  'react-loader-spinner'
+import { useDispatch } from "react-redux";
+import { deleteStepReducer, addStepReducer } from '../../reducers/stepSlice.js';
 
 export const CreateProject = function ({toggleCreateModal, projects, setProjects}) {
     const [projectData, setprojectData] = useState({
@@ -18,18 +20,28 @@ export const CreateProject = function ({toggleCreateModal, projects, setProjects
     });
     const [steps, setSteps] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const dispatch = useDispatch()
 
     // Creating a step
     // if the project is provided (from api), add it to project prop, otherwise initialise as empty
     const createStep = function () {
         const uuid = uuidv4()
+        const stepData = {
+            parent: projectData.id
+        };
+        
         setSteps([...steps, {project: '', id: uuid, date: new Date(), parent: projectData.id, completed: false}])
-        }
+        console.log("create", stepData)
+        dispatch(addStepReducer(stepData))
+        
+    }
 
 
     const deleteStep = function (e, id) {
         e.preventDefault()
         setSteps(steps.filter((step) => step.id != id))
+        // console.log("delete")
+        dispatch(deleteStepReducer(id))
     }
 
     // Breaking the project down
