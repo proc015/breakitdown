@@ -6,3 +6,9 @@ NodeJS & Express for the backend, React & Tailwind for the frontend & MongoDB & 
 
 # Usage
 Run npm i from client & server folders to run. You will have to have an API key from OpenAI's API platform to use the AI functionality. The app also works without it, the user just has to add their own tasks.
+
+## Authors
+
+Sally Carlund - [Github](https://github.com/sal-car/) - [LinkedIn](https://www.linkedin.com/in/sally-carlund/)
+Marc Rogers - [Github](https://github.com/rogermarco) - [LinkedIn](https://www.linkedin.com/in/rogersmarco/)
+Ryan Procaccini - [Github](https://github.com/proc015) - [LinkedIn](https://www.linkedin.com/in/proc015/)
